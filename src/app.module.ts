@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { DietModule } from './diet/diet.module';
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
             ],
         }),
         DietModule,
+        AuthModule,
     ],
     controllers: [],
     providers: [],
