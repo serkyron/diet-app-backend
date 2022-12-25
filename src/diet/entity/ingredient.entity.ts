@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { MealToIngredient } from "./meal-to-ingredient.entity";
 
 @Entity()
 export class Ingredient {
@@ -33,4 +34,7 @@ export class Ingredient {
         name: 'fats',
     })
     fats: number;
+
+    @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.ingredient)
+    public mealToIngredients!: MealToIngredient[];
 }

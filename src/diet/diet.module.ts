@@ -9,6 +9,7 @@ import { IngredientService } from "./service/ingredient.service";
 import { MealService } from "./service/meal.service";
 import { MealController } from "./controller/meal.controller";
 import { Meal } from "./entity/meal.entity";
+import { MealToIngredient } from "./entity/meal-to-ingredient.entity";
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { Meal } from "./entity/meal.entity";
         TypeOrmModule.forFeature([
             Ingredient,
             Meal,
+            MealToIngredient,
         ])
     ],
     providers: [

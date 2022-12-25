@@ -26,16 +26,6 @@ export class MealService {
     // }
 
     public async delete(id: number): Promise<void> {
-        let meal = await this.mealRepository.findOneBy({id: id});
-
-        if (meal === null) {
-            return;
-        }
-
-        await this.mealRepository.update(id, {
-            ingredients: [],
-        });
-
         await this.mealRepository.delete({id: id});
     }
 }

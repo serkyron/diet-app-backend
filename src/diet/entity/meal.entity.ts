@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Ingredient } from "./ingredient.entity";
+import { MealToIngredient } from "./meal-to-ingredient.entity";
 
 @Entity()
 export class Meal {
@@ -25,7 +26,6 @@ export class Meal {
     })
     updatedAt: Date;
 
-    @ManyToMany(() => Ingredient)
-    @JoinTable()
-    ingredients: Ingredient[];
+    @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.meal)
+    public mealToIngredients!: MealToIngredient[];
 }
