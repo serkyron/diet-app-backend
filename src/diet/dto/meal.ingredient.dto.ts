@@ -1,9 +1,9 @@
-import { IsNumber, IsNotEmpty } from "class-validator";
+import { IsNumber, IsNotEmpty, IsObject } from "class-validator";
 
 export class MealIngredientDto {
     @IsNotEmpty()
-    @IsNumber()
-    readonly ingredientId: number;
+    @IsObject()
+    readonly ingredient: {id: number};
 
     @IsNotEmpty()
     @IsNumber()

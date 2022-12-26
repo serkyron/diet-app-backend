@@ -24,16 +24,9 @@ export class MealController {
     @UseGuards(JwtAuthGuard)
     @Put('/')
     public async create(@Body() dto: MealDto): Promise<ResponseDto<Meal>> {
-
-
         const meal = await this.mealService.create({
             name: dto.name,
-            mealToIngredients: [
-                {
-                    amount: 45.67,
-                    ingredient: {id: 3},
-                }
-            ],
+            mealToIngredients: dto.ingredients,
         });
 
         return new ResponseDto<Meal>([meal]);

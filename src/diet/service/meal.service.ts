@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
-import { Ingredient } from "../entity/ingredient.entity";
 import { DataSource, DeepPartial, Repository } from "typeorm";
 import { Meal } from "../entity/meal.entity";
-import { MealIngredientDto } from "../dto/meal.ingredient.dto";
 import { MealToIngredient } from "../entity/meal-to-ingredient.entity";
 
 @Injectable()
@@ -23,7 +21,10 @@ export class MealService {
         mealPartial.createdAt = new Date();
         mealPartial.updatedAt = new Date();
 
-        return this.mealRepository.save(mealPartial);
+        const meal = await this.mealRepository.save(mealPartial);
+        let reloadedMeal = await this.mealRepository.findOneBy({id: meal.id});
+
+        return reloadedMeal!;
     }
 
     public async delete(id: number): Promise<void> {
