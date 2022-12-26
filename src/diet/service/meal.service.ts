@@ -1,29 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Ingredient } from "../entity/ingredient.entity";
-import { Repository } from "typeorm";
+import { DataSource, DeepPartial, Repository } from "typeorm";
 import { Meal } from "../entity/meal.entity";
+import { MealIngredientDto } from "../dto/meal.ingredient.dto";
+import { MealToIngredient } from "../entity/meal-to-ingredient.entity";
 
 @Injectable()
 export class MealService {
     constructor(
         @InjectRepository(Meal)
-        private mealRepository: Repository<Meal>
+        private mealRepository: Repository<Meal>,
+        @InjectRepository(MealToIngredient)
+        private mealToIngredientRepository: Repository<MealToIngredient>,
     ) {}
 
     public getAll(): Promise<Meal[]> {
         return this.mealRepository.find();
     }
 
-    // public create(name: string, ): Promise<Ingredient> {
-    //     return this.ingredientRepository.save({
-    //         name,
-    //         calories,
-    //         proteins,
-    //         carbohydrates,
-    //         fats,
-    //     });
-    // }
+    public async create(mealPartial: DeepPartial<Meal>): Promise<Meal> {
+        mealPartial.createdAt = new Date();
+        mealPartial.updatedAt = new Date();
+
+        return this.mealRepository.save(mealPartial);
+    }
 
     public async delete(id: number): Promise<void> {
         await this.mealRepository.delete({id: id});

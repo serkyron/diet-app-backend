@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Ingredient } from "../entity/ingredient.entity";
-import { Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 
 @Injectable()
 export class IngredientService {
@@ -14,28 +14,16 @@ export class IngredientService {
         return this.ingredientRepository.find();
     }
 
-    public create(name: string, calories: number, proteins: number, carbohydrates: number, fats: number): Promise<Ingredient> {
-        return this.ingredientRepository.save({
-            name,
-            calories,
-            proteins,
-            carbohydrates,
-            fats,
-        });
+    public create(ingredientPartial: DeepPartial<Ingredient>): Promise<Ingredient> {
+        return this.ingredientRepository.save(ingredientPartial);
     }
 
     public async delete(id: number): Promise<void> {
         await this.ingredientRepository.delete({id: id});
     }
 
-    public async update(id: number, name?: string, calories?: number, proteins?: number, carbohydrates?: number, fats?: number): Promise<Ingredient|null> {
-        await this.ingredientRepository.update(id,{
-            name,
-            calories,
-            proteins,
-            carbohydrates,
-            fats,
-        });
+    public async update(id: number, ingredientPartial: DeepPartial<Ingredient>): Promise<Ingredient|null> {
+        await this.ingredientRepository.update(id,ingredientPartial);
 
         return this.ingredientRepository.findOneBy({id: id});
     }

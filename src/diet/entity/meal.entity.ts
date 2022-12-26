@@ -28,6 +28,7 @@ export class Meal {
 
     @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.meal, {
         eager: true,
+        cascade: true,
     })
     public mealToIngredients!: MealToIngredient[];
 }

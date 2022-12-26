@@ -26,13 +26,7 @@ export class IngredientController {
     @UseGuards(JwtAuthGuard)
     @Put('/')
     public async create(@Body() dto: IngredientDto): Promise<ResponseDto<Ingredient>> {
-        const ingredient = await this.ingredientService.create(
-            dto.name,
-            dto.calories,
-            dto.proteins,
-            dto.carbohydrates,
-            dto.fats,
-        );
+        const ingredient = await this.ingredientService.create(dto);
 
         return new ResponseDto<Ingredient>([ingredient]);
     }
@@ -48,14 +42,7 @@ export class IngredientController {
     @UseGuards(JwtAuthGuard)
     @Post(':id')
     public async update(@Param('id') id: number, @Body() dto: UpdateIngredientDto): Promise<ResponseDto<Ingredient>> {
-        const ingredient = await this.ingredientService.update(
-            id,
-            dto.name,
-            dto.calories,
-            dto.proteins,
-            dto.carbohydrates,
-            dto.fats,
-        );
+        const ingredient = await this.ingredientService.update(id, dto);
         const data = ingredient ? [ingredient] : [];
 
         return new ResponseDto<Ingredient>(data);
