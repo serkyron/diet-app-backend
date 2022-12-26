@@ -26,6 +26,8 @@ export class Meal {
     })
     updatedAt: Date;
 
-    @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.meal)
+    @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.meal, {
+        eager: true,
+    })
     public mealToIngredients!: MealToIngredient[];
 }

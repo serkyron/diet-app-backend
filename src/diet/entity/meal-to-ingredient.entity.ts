@@ -12,9 +12,14 @@ export class MealToIngredient {
     })
     amount!: number;
 
-    @ManyToOne(() => Meal, (meal) => meal.mealToIngredients)
+    @ManyToOne(() => Meal, (meal) => meal.mealToIngredients, {
+        onDelete: "CASCADE",
+    })
     public meal!: Meal;
 
-    @ManyToOne(() => Ingredient, (ingredient) => ingredient.mealToIngredients)
+    @ManyToOne(() => Ingredient, (ingredient) => ingredient.mealToIngredients, {
+        eager: true,
+        onDelete: "CASCADE",
+    })
     public ingredient!: Ingredient;
 }

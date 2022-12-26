@@ -7,7 +7,7 @@ import { Meal } from "../entity/meal.entity";
 @Injectable()
 export class MealService {
     constructor(
-        @InjectRepository(Ingredient)
+        @InjectRepository(Meal)
         private mealRepository: Repository<Meal>
     ) {}
 
