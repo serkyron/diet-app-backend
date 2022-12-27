@@ -35,6 +35,11 @@ export class Ingredient {
     })
     fats: number;
 
+    @Column({
+        length: 500,
+    })
+    category: string;
+
     @OneToMany(() => MealToIngredient, mealToIngredients => mealToIngredients.ingredient)
     public mealToIngredients!: MealToIngredient[];
 }

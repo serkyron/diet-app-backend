@@ -1,4 +1,5 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsEnum, IsNumber, IsString } from "class-validator";
+import { Categories } from "./ingredient.dto";
 
 export class UpdateIngredientDto {
     @IsString()
@@ -15,4 +16,7 @@ export class UpdateIngredientDto {
 
     @IsNumber()
     readonly fats: number;
+
+    @IsEnum(Categories)
+    readonly category: string;
 }

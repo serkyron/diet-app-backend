@@ -7,6 +7,7 @@ export class Recommendation {
 
     @Column({
         length: 500,
+        unique: true
     })
     name: string;
 

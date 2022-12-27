@@ -1,4 +1,10 @@
-import { IsNumber, IsNotEmpty, IsString } from "class-validator";
+import { IsNumber, IsNotEmpty, IsString, IsEnum } from "class-validator";
+
+export enum Categories {
+    PROTEINS = "proteins",
+    CARBOHYDRATES = "carbohydrates",
+    FATS = "fats",
+}
 
 export class IngredientDto {
     @IsNotEmpty()
@@ -20,4 +26,8 @@ export class IngredientDto {
     @IsNotEmpty()
     @IsNumber()
     readonly fats: number;
+
+    @IsNotEmpty()
+    @IsEnum(Categories)
+    readonly category: string;
 }
