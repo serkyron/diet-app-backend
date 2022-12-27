@@ -23,7 +23,7 @@ export class IngredientService {
     }
 
     public async update(id: number, ingredientPartial: DeepPartial<Ingredient>): Promise<Ingredient|null> {
-        await this.ingredientRepository.update(id,ingredientPartial);
+        await this.ingredientRepository.update(id, ingredientPartial);
 
         return this.ingredientRepository.findOneBy({id: id});
     }

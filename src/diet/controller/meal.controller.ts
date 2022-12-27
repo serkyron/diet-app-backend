@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { ResponseDto } from "../dto/response.dto";
 import { JwtAuthGuard } from "../../auth/guards/jwt-auth.guard";
 import { MealService } from "../service/meal.service";
@@ -10,7 +10,7 @@ import { MealDto } from "../dto/meal.dto";
 })
 export class MealController {
     constructor(
-        private readonly mealService: MealService
+        private readonly mealService: MealService,
     ) {}
 
     @UseGuards(JwtAuthGuard)

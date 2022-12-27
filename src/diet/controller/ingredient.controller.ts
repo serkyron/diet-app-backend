@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { DietService } from '../service/diet.service';
+import { Body, Controller, Delete, Get, Param, Patch, Put, UseGuards } from '@nestjs/common';
 import { Ingredient } from "../entity/ingredient.entity";
 import { ResponseDto } from "../dto/response.dto";
 import { IngredientService } from "../service/ingredient.service";
@@ -12,7 +11,7 @@ import { UpdateIngredientDto } from "../dto/update.ingredient.dto";
 })
 export class IngredientController {
     constructor(
-        private readonly ingredientService: IngredientService
+        private readonly ingredientService: IngredientService,
     ) {}
 
     @UseGuards(JwtAuthGuard)
@@ -40,7 +39,7 @@ export class IngredientController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post(':id')
+    @Patch(':id')
     public async update(@Param('id') id: number, @Body() dto: UpdateIngredientDto): Promise<ResponseDto<Ingredient>> {
         const ingredient = await this.ingredientService.update(id, dto);
         const data = ingredient ? [ingredient] : [];

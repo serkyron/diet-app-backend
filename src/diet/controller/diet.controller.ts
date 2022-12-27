@@ -3,6 +3,7 @@ import { DietService } from '../service/diet.service';
 
 @Controller()
 export class DietController {
-    constructor(private readonly appService: DietService) {
-    }
+    constructor(
+        private readonly dietService: DietService,
+    ) {}
 }

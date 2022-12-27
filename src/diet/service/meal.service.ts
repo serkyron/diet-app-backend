@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
-import { DataSource, DeepPartial, Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import { Meal } from "../entity/meal.entity";
 import { MealToIngredient } from "../entity/meal-to-ingredient.entity";
 

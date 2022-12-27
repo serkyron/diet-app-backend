@@ -10,6 +10,9 @@ import { MealService } from "./service/meal.service";
 import { MealController } from "./controller/meal.controller";
 import { Meal } from "./entity/meal.entity";
 import { MealToIngredient } from "./entity/meal-to-ingredient.entity";
+import { RecommendationController } from "./controller/recommendation.controller";
+import { RecommendationService } from "./service/recommendation.service";
+import { Recommendation } from "./entity/recommendation.entity";
 
 @Module({
     imports: [
@@ -18,17 +21,20 @@ import { MealToIngredient } from "./entity/meal-to-ingredient.entity";
             Ingredient,
             Meal,
             MealToIngredient,
+            Recommendation,
         ])
     ],
     providers: [
         DietService,
         IngredientService,
         MealService,
+        RecommendationService,
     ],
     controllers: [
         DietController,
         IngredientController,
         MealController,
+        RecommendationController,
     ],
 })
 export class DietModule {
