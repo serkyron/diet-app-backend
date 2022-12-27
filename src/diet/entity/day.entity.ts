@@ -16,30 +16,35 @@ export class DayEntity {
     @ManyToOne(() => Meal, {
         eager: true,
         onDelete: "SET NULL",
+        nullable: true,
     })
     breakfast: Meal
 
     @ManyToOne(() => Meal, {
         eager: true,
         onDelete: "SET NULL",
+        nullable: true,
     })
     snack1: Meal
 
     @ManyToOne(() => Meal, {
         eager: true,
         onDelete: "SET NULL",
+        nullable: true,
     })
     lunch: Meal
 
     @ManyToOne(() => Meal, {
         eager: true,
         onDelete: "SET NULL",
+        nullable: true,
     })
     snack2: Meal
 
     @ManyToOne(() => Meal, {
         eager: true,
         onDelete: "SET NULL",
+        nullable: true,
     })
     dinner: Meal
 
