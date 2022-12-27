@@ -13,6 +13,7 @@ import { MealToIngredient } from "./entity/meal-to-ingredient.entity";
 import { RecommendationController } from "./controller/recommendation.controller";
 import { RecommendationService } from "./service/recommendation.service";
 import { Recommendation } from "./entity/recommendation.entity";
+import { DayEntity } from "./entity/day.entity";
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import { Recommendation } from "./entity/recommendation.entity";
             Meal,
             MealToIngredient,
             Recommendation,
+            DayEntity,
         ])
     ],
     providers: [
