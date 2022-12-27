@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeepPartial, Repository } from "typeorm";
 import { DayEntity } from "../entity/day.entity";
+import { Ingredient } from "../entity/ingredient.entity";
 
 @Injectable()
 export class DietService {
@@ -22,6 +23,12 @@ export class DietService {
         let reloadedDay = await this.dayRepository.findOneBy({id: day.id});
 
         return reloadedDay!;
+    }
+
+    public async update(id: number, dayPartial: DeepPartial<DayEntity>): Promise<DayEntity|null> {
+        await this.dayRepository.update(id, dayPartial);
+
+        return this.dayRepository.findOneBy({id: id});
     }
 
     public async delete(id: number): Promise<void> {

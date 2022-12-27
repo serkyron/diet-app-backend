@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Put, UseGuards } from '@nestjs/common';
 import { DietService } from '../service/diet.service';
 import { JwtAuthGuard } from "../../auth/guards/jwt-auth.guard";
 import { ResponseDto } from "../dto/response.dto";
 import { DayEntity } from "../entity/day.entity";
 import { DayDto } from "../dto/day.dto";
+import { UpdateDayDto } from "../dto/update.day.dto";
 
 @Controller({
     path: 'day',
@@ -27,6 +28,15 @@ export class DietController {
         const meal = await this.dietService.create(dto);
 
         return new ResponseDto<DayEntity>([meal]);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Patch(':id')
+    public async update(@Param('id') id: number, @Body() dto: UpdateDayDto): Promise<ResponseDto<DayEntity>> {
+        const day = await this.dietService.update(id, dto);
+        const data = day ? [day] : [];
+
+        return new ResponseDto<DayEntity>(data);
     }
 
     @UseGuards(JwtAuthGuard)
