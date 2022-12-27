@@ -5,7 +5,9 @@ import { ResponseDto } from "../dto/response.dto";
 import { DayEntity } from "../entity/day.entity";
 import { DayDto } from "../dto/day.dto";
 
-@Controller()
+@Controller({
+    path: 'day',
+})
 export class DietController {
     constructor(
         private readonly dietService: DietService,
