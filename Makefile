@@ -13,7 +13,7 @@ clone-dependencies: clone-api
 
 install-api-modules:
 	@echo "\n${BOLD} Installing npm modules ... ${END_COLOR}"
-	@docker run -v `pwd`/api:/var/www/api/ -w /var/www/api/ node:14.15-stretch npm i
+	@docker run -v `pwd`:/var/www/api/ -w /var/www/api/ node:14.15-stretch npm i
 
 rebuild:
 	@echo "\n${BOLD} Rebuilding containers... ${END_COLOR}"
