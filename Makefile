@@ -65,14 +65,14 @@ clone-api:
 
 console-api:
 ifeq (${ENVIRONMENT}, production)
-	docker-compose exec api bash
+	docker-compose exec app bash
 else
-	docker-compose -f ./docker-compose-dev.yml exec api bash
+	docker-compose -f ./docker-compose-dev.yml exec app bash
 endif
 
 logs-api:
 ifeq (${ENVIRONMENT}, production)
-	docker-compose logs --tail=100 -f api
+	docker-compose logs --tail=100 -f app
 else
-	docker-compose -f ./docker-compose-dev.yml logs --tail=100 -f api
+	docker-compose -f ./docker-compose-dev.yml logs --tail=100 -f app
 endif
