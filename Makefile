@@ -63,33 +63,16 @@ clone-api:
 	@echo "\n${BOLD}Cloning api repository (${API_BRANCH_NAME} branch) ${END_COLOR}"
 	@bash -c "set -evx; if [ -d ./api ]; then cd ./api && git pull origin ${API_BRANCH_NAME}; else git clone -b ${API_BRANCH_NAME} ${API_GIT_URL} ./api; fi"
 
-nginx-reload:
-	@docker-compose exec -u root nginx bash -c "service nginx reload"
-
-schema-migrate:
-	@docker-compose exec api bash -c "npm run typeorm migration:run"
-
-generate-ssl:
-	@echo "Generating SSL certificate"
-	@bash ./sh-generate-ssl.sh
-
-nginx-config:
-	@bash ./sh-config-nginx.sh
-
 console-api:
-	@docker-compose exec api bash
-
-console-nginx:
-	@docker-compose exec nginx bash
-
-console-db:
-	@docker-compose exec db bash
+ifeq (${ENVIRONMENT}, production)
+	docker-compose exec api bash
+else
+	docker-compose -f ./docker-compose-dev.yml exec api bash
+endif
 
 logs-api:
-	@docker-compose logs --tail=100 -f api
-
-logs-nginx:
-	@docker-compose logs --tail=100 -f nginx
-
-logs-db:
-	@docker-compose logs --tail=100 -f db
+ifeq (${ENVIRONMENT}, production)
+	docker-compose logs --tail=100 -f api
+else
+	docker-compose -f ./docker-compose-dev.yml logs --tail=100 -f api
+endif
