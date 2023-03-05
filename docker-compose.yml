@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    build: ./docker
+    container_name: diet-app
+    ports:
+      - 8080:3000
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: "pm2-runtime start ecosystem.config.js"
+    networks:
+      - network
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/dump/:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: "diet"
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+    ipam:
+      driver: default
+      config:
+        - subnet: 255.255.255.0/24
