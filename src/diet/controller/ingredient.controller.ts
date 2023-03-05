@@ -40,7 +40,7 @@ export class IngredientController {
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    public async update(@Param('id') id: number, @Body() dto: UpdateIngredientDto): Promise<ResponseDto<Ingredient>> {
+    public async update(@Param('id') id: number, @Body() dto: IngredientDto): Promise<ResponseDto<Ingredient>> {
         const ingredient = await this.ingredientService.update(id, dto);
         const data = ingredient ? [ingredient] : [];
 

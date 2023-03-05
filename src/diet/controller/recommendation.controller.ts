@@ -40,7 +40,7 @@ export class RecommendationController {
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    public async update(@Param('id') id: number, @Body() dto: UpdateRecommendationDto): Promise<ResponseDto<Recommendation>> {
+    public async update(@Param('id') id: number, @Body() dto: RecommendationDto): Promise<ResponseDto<Recommendation>> {
         const recommendation = await this.recommendationService.update(id, dto);
         const data = recommendation ? [recommendation] : [];
 

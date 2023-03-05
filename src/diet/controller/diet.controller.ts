@@ -32,7 +32,7 @@ export class DietController {
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    public async update(@Param('id') id: number, @Body() dto: UpdateDayDto): Promise<ResponseDto<DayEntity>> {
+    public async update(@Param('id') id: number, @Body() dto: DayDto): Promise<ResponseDto<DayEntity>> {
         const day = await this.dietService.update(id, dto);
         const data = day ? [day] : [];
 
