@@ -37,8 +37,7 @@ export class MealController {
     public async update(@Param('id') id: number, @Body() dto: MealDto): Promise<ResponseDto<Meal>> {
         const meal = await this.mealService.update(id, {
             name: dto.name,
-            mealToIngredients: dto.ingredients,
-        });
+        }, dto.ingredients);
         const data = meal ? [meal] : [];
 
         return new ResponseDto<Meal>(data);
