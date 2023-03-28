@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Put, UseGuards } from '@nestjs/common';
 import { ResponseDto } from "../dto/response.dto";
 import { JwtAuthGuard } from "../../auth/guards/jwt-auth.guard";
 import { MealService } from "../service/meal.service";
@@ -30,6 +30,18 @@ export class MealController {
         });
 
         return new ResponseDto<Meal>([meal]);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put(':id')
+    public async update(@Param('id') id: number, @Body() dto: MealDto): Promise<ResponseDto<Meal>> {
+        const meal = await this.mealService.update(id, {
+            name: dto.name,
+            mealToIngredients: dto.ingredients,
+        });
+        const data = meal ? [meal] : [];
+
+        return new ResponseDto<Meal>(data);
     }
 
     @UseGuards(JwtAuthGuard)
