@@ -14,6 +14,9 @@ import { RecommendationController } from "./controller/recommendation.controller
 import { RecommendationService } from "./service/recommendation.service";
 import { Recommendation } from "./entity/recommendation.entity";
 import { DayEntity } from "./entity/day.entity";
+import { MealRecommendation } from "./entity/meal-recommendation.entity";
+import { MealRecommendationService } from "./service/meal-recommendation.service";
+import { MealRecommendationController } from "./controller/meal-recommendation.controller";
 
 @Module({
     imports: [
@@ -23,6 +26,7 @@ import { DayEntity } from "./entity/day.entity";
             Meal,
             MealToIngredient,
             Recommendation,
+            MealRecommendation,
             DayEntity,
         ])
     ],
@@ -31,12 +35,14 @@ import { DayEntity } from "./entity/day.entity";
         IngredientService,
         MealService,
         RecommendationService,
+        MealRecommendationService,
     ],
     controllers: [
         DietController,
         IngredientController,
         MealController,
         RecommendationController,
+        MealRecommendationController,
     ],
 })
 export class DietModule {
